@@ -1,26 +1,33 @@
-# Welcome to a Readme File
-## Second Welcome
-### Third Welcome
+# Assignment 2
 
-*italic*
+This assignment preprocesses an image for a YOLO classifier. It loads blue-green-red (BGR) images from a directory, converts each to red-green-blue (RGB), resizes it, normalizes it, converts it to a grayscale image, plots the output, and then saves each stage of transformation, from input to final output.
 
-**bold**
+## Data
 
-* list 1
-* list 2
+Input data for this assignment is in the `data/Assignment2/raw/` directory of this repository and output data is in `data/Assignment2/processed`.
 
-- list 1
-- list 2
+## Reproducing the results
+* You can run the preprocessing interactively via`module3_prasmus3.ipynb`.
+* To run at the command line, execute:
+```
+$python preprocess.py -i <path-to-source-image-dir> -o <path-to-dst-image-dir> -d <width, height tuple>
+```
 
-This decribes this particular project and directory level.
+To view the help menu, execute:
+```
+$ python preprocess.py -h
+usage: preprocess.py [-h] [-i SRC_DIR] [-o DST_DIR] [-d DSIZE [DSIZE ...]]
 
+optional arguments:
+  -h, --help            show this help message and exit
+  -i SRC_DIR, --src_dir SRC_DIR
+  -o DST_DIR, --dst_dir DST_DIR
+  -d DSIZE [DSIZE ...], --dsize DSIZE [DSIZE ...]
+```
 
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
-
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
-
-Bring in local graphic
-![GitHub Logo](./regan.png) 
-
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 
+## Additional features include:
+* Parameterization of normalization means and standard deviations.
+* Parameterization of method of grayscaling.
+* Documentation and assertion tests for each function.
+* Parameterized plotting function.
+* Saving of input, intermediate, and final results.
