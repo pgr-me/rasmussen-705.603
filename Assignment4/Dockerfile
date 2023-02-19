@@ -2,6 +2,9 @@ FROM python:3.8
 WORKDIR /work
 COPY . ./
 
+ENV KAGGLE_USERNAME=$KAGGLE_USERNAME \
+    KAGGLE_KEY=$KAGGLE_KEY
+
 # Install jq to handle JSON, install Python packages, and make directory for Kaggle creds
 RUN apt-get update &&\ 
     apt-get install -y jq &&\
