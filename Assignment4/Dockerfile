@@ -15,5 +15,5 @@ RUN chmod 600 /root/.kaggle/kaggle.json
 #RUN kaggle datasets download eswarchandt/amazon-music-reviews -p /work/data 
 
 
-CMD ["hello_world.py"]
-ENTRYPOINT ["python"]
+#CMD ["hello_world.py"]
+#ENTRYPOINT ["python"]
