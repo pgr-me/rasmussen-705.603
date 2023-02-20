@@ -1,4 +1,4 @@
-# Assignment 2: Text preprocessing
+# Assignment 4: Text preprocessing
 
 ## Project description
 
