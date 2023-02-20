@@ -1,26 +1,21 @@
-# Welcome to a Readme File
-## Second Welcome
-### Third Welcome
+# Assignment 2: Text preprocessing
 
-*italic*
+## Project description
 
-**bold**
+This program downloads and preprocesses Amazon musical instrument review text for subsequent use in natural language processing analysis. By default, the program processes the `summary`column of the downloaded CSV, followed by tokenization, stemming, and lemmatization. Since stemming and lemmatization are used in lieu of one another, the program generates two outputs: one that has been stemmed and the other which has been lemmatized. Final outputs that are printed to console are top words by TFIDF score averaged across all documents.
 
-* list 1
-* list 2
+## Data organization
 
-- list 1
-- list 2
+Inputs are downloaded into the `raw` data directory. The program saves outputs in the `processed` directory. This program is idempotent: the inputs are never overwritten; only new outputs are created.
 
-This decribes this particular project and directory level.
+.
+├── work
+│   ├── Assignment4.py
+│   └── Assignment4.ipynb
+├── data
+│   ├── processed
+│   └── raw
+│       ├── Musical_Instruments_5.json
+│       └── Musical_instruments_reviews.csv
+└── readme.md
 
-
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
-
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
-
-Bring in local graphic
-![GitHub Logo](./regan.png) 
-
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 
