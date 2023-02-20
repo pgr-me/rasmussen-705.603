@@ -4,12 +4,11 @@ WORKDIR /work
 COPY data/Assignment4/. /work/data
 COPY Assignment4/. /work
 
-
-# Install jq to handle JSON, install Python packages, and make directory for Kaggle creds
 RUN apt-get update &&\ 
     /usr/local/bin/python -m pip install --upgrade pip &&\
     pip3 install -r requirements.txt
 
+CMD [ "python", "import nltk; nltk.download('punkt')" ]
 
 
 #CMD ["hello_world.py"]
