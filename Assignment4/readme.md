@@ -19,3 +19,11 @@ Inputs are downloaded into the `raw` data directory. The program saves outputs i
 │       └── Musical_instruments_reviews.csv
 └── readme.md
 ```
+
+## DockerHub
+
+Rather than clone the repository to run the code, the user can opt to pull Docker image for this assignment from [the DockerHub repo](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
+* Pull the image: `$ docker pull pgrjhu/705.603:module4-1.1`
+* Run the executable to reproduce the results: `$ docker run [image ID]`.
+
+Additional instructions for running an image are provided in the [DockerHub repo README](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
