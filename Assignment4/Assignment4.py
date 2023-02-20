@@ -15,14 +15,14 @@ import gensim
 from gensim.corpora.dictionary import Dictionary
 from gensim.interfaces import TransformedCorpus
 import nltk
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("wordnet")
 from nltk.stem import SnowballStemmer, WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import pandas as pd
 
-nltk.download("punkt")
-nltk.download("stopwords")
-nltk.download("wordnet")
 
 
 DATA_DIR = Path("/work/data")
