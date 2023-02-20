@@ -178,6 +178,8 @@ def score_terms(sentences: List[List[str]], lemmatize_: bool=True, limit=5) -> p
 
 if __name__ == "__main__":
     data = pd.read_csv(SRC)
+    tokenized_reviews = tokenize(data["summary"])
+    nostops = remove_stopwords(tokenized_reviews)
     stem_top_term_scores = score_terms(nostops, lemmatize_=False, limit=15)
     lem_top_term_scores = score_terms(nostops, lemmatize_=True, limit=15)
     print("Top words from stemming")
@@ -186,5 +188,5 @@ if __name__ == "__main__":
     print("Top words from lemmatizing")
     print(lem_top_term_scores)
     print(f"Save outputs to {PROCESSED_DIR}")
-    stem_top_term_scores(PROCESSED_DIR / "stem_top_term_scores.csv")
-    lem_top_term_scores(PROCESSED_DIR / "lem_top_term_scores.csv")
+    stem_top_term_scores.to_csv(PROCESSED_DIR / "stem_top_term_scores.csv")
+    lem_top_term_scores.to_csv(PROCESSED_DIR / "lem_top_term_scores.csv")
