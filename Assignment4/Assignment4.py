@@ -20,6 +20,10 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 import pandas as pd
 
+nltk.download("punkt")
+nltk.download("stopwords")
+nltk.download("wordnet")
+
 
 DATA_DIR = Path("/work/data")
 RAW_DIR = DATA_DIR / "raw"
