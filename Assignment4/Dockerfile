@@ -11,5 +11,5 @@ RUN apt-get update &&\
 CMD [ "python", "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('wordnet')" ]
 
 
-#CMD ["hello_world.py"]
-#ENTRYPOINT ["python"]
+CMD ["Assignment4.py"]
+ENTRYPOINT ["python"]
