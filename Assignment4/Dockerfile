@@ -8,7 +8,7 @@ RUN apt-get update &&\
     /usr/local/bin/python -m pip install --upgrade pip &&\
     pip3 install -r requirements.txt
 
-CMD [ "python", "import nltk; nltk.download('punkt')" ]
+CMD [ "python", "import nltk; nltk.download('punkt'); nltk.download('stopwords')" ]
 
 
 #CMD ["hello_world.py"]
