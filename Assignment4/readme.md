@@ -7,7 +7,7 @@ This program downloads and preprocesses Amazon musical instrument review text fo
 ## Data organization
 
 Inputs are downloaded into the `raw` data directory. The program saves outputs in the `processed` directory. This program is idempotent: the inputs are never overwritten; only new outputs are created.
-
+```
 .
 ├── work
 │   ├── Assignment4.py
@@ -18,4 +18,4 @@ Inputs are downloaded into the `raw` data directory. The program saves outputs i
 │       ├── Musical_Instruments_5.json
 │       └── Musical_instruments_reviews.csv
 └── readme.md
-
+```
