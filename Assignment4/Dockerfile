@@ -2,7 +2,7 @@ FROM python:3.8
 WORKDIR /work
 
 COPY data/Assignment4/. /work/data
-COPY Assignment4/. ./
+COPY Assignment4/. /work
 
 
 # Install jq to handle JSON, install Python packages, and make directory for Kaggle creds
