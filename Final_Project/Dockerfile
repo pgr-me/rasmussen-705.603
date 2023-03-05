@@ -6,7 +6,7 @@ RUN apt-get update -y && \
 
 WORKDIR /work
 
-COPY assignment4/. /work
+COPY Final_Project/. /work
 RUN pip install -r requirements.txt
 
 RUN mkdir -p /work/data/raw /work/data/processed
