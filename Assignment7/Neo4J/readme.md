@@ -76,3 +76,7 @@ Visualize the schema:
 CALL db.schema.visualization()
 ```
 
+## Jupyter
+
+To start a Jupyter Lab session, do:
+`$ jupyter lab --no-browser --ip=0.0.0.0 --allow-root`
