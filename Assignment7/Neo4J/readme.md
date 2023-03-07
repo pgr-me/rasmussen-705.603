@@ -27,7 +27,7 @@ Pull the image: `$ docker pull pgrjhu/705.603:a7-neo4j`
 
 Run the executable to reproduce the results: 
 ```
-docker run -p 7474:7474 -p 7687:7687 \
+docker run -p 7474:7474 -p 7687:7687 -p 8888:8888 \
    -d --restart unless-stopped \
    -v /nosql/neo4j/data:/data \
    -v /nosql/neo4j/import:/import \

@@ -2,3 +2,4 @@ jupyterlab
 neo4j
 pandas
 matplotlib
+py2neo
