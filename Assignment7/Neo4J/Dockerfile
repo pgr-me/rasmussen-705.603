@@ -3,7 +3,7 @@ FROM neo4j
 WORKDIR /nosql/neo4j
 
 COPY Assignment7/Neo4J/. /nosql/neo4j
-COPY data/Assignment7/raw/.  /import
+COPY data/Assignment7/raw/.  /nosql/neo4j/import
 
 RUN apt update &&\
     apt install software-properties-common -y &&\
