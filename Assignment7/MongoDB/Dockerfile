@@ -1,4 +1,4 @@
-FROM neo4j
+FROM mongo:latest
 
 WORKDIR /nosql/mongo
 
