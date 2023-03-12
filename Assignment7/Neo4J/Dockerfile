@@ -11,4 +11,4 @@ RUN apt update &&\
     pip3 install -r requirements.txt &&\
     mkdir -p /nosql/neo4j/data
 
-CMD ["python3", "speed_dating_analysis.py"]
+CMD ["python3", "neo4jdating.py"]
