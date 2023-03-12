@@ -96,6 +96,15 @@ WITH count(n) as count
 RETURN 'female' as label, count
 ```
 
+Get the unique set of mutual matches among speed daters:
+```
+MATCH (p1:Person)-[:Date {match: 1}]->(p2:Person)
+WHERE
+p1.id < p2.id
+RETURN DISTINCT p1.id, p2.id
+ORDER BY p1.id, p2.id
+```
+
 ## Jupyter
 
 To start a Jupyter Lab session, do:
