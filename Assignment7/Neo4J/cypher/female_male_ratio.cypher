@@ -49,4 +49,4 @@ CALL {
     RETURN count AS n_males
 }
 
-RETURN (n_females * 1.0) / (n_males * 1.0);
+RETURN (n_females * 1.0) / (n_males * 1.0) as female_male_ratio;
