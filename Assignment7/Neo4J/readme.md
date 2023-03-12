@@ -77,9 +77,23 @@ MERGE(
 SET p1.gender = toInteger(row.gender)
 ```
 
+
 Visualize the schema:
 ```
 CALL db.schema.visualization()
+```
+
+Get counts of males and females (assuming males are 0 and females are 1):
+```
+MATCH (n:Person)
+WHERE n.gender=0
+WITH count(n) AS count
+RETURN 'male' AS label, count
+UNION ALL
+MATCH (n:person)
+WHERE n.gender=1
+WITH count(n) as count
+RETURN 'female' as label, count
 ```
 
 ## Jupyter
