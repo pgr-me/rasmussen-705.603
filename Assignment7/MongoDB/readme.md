@@ -2,32 +2,18 @@
 
 ## Project description
 
-This program provides code to analyze a speed dating dataset using 1) Neo4J and 2) MongoDB as two separate approaches to organize the data for use in a decision tree classifier to predict which dates end in matches..
+This folder provides code to analyze a speed dating dataset using MongoDB to organize the data for use in a decision tree classifier to predict which dates end in matches.
 
 ## Assignment structure
 
-The assignment is sub-divided into Neo4J and MongoDB folders. Each has its own set of scripts and Dockerfiles to reproduce the work in a container.
 ```
-Assignment7
-├── MongoDB
-│   ├── Dockerfile
-│   ├── mongodating.ipynb
-│   ├── mongodating.py
-│   ├── readme.md
-│   ├── requirements.txt
-│   └── utils.py
-├── Neo4J
-│   ├── Dockerfile
-│   ├── cypher
-│   │   ├── female_male_ratio.cypher
-│   │   ├── match_frac.cypher
-│   │   └── schema_viz.cypher
-│   ├── neo4dating.py
-│   ├── neo4jdating.ipynb
-│   ├── readme.md
-│   ├── requirements.txt
-│   └── utils.py
-└── readme.md
+.
+├── Dockerfile
+├── mongodating.ipynb
+├── mongodating.py
+├── readme.md
+├── requirements.txt
+└── utils.py
 ```
 
 ## Docker
