@@ -29,11 +29,10 @@ Run the executable to reproduce the results:
 ```
 docker run \
    -p 27017:27017 -p 8888:8888 \
-   -d \
-   --restart unless-stopped \
+   -dit \
    -v /nosql/mongo/data:/data/db \
    -v /nosql/mongo/import:/import \
-   --name mongodb \
+   --name mymongo \
    pgrjhu/705.603:a7-mongodb
 ```
 
