@@ -70,7 +70,7 @@ def parse_cypher_output(
     with open(output_path) as f:
         output = f.readlines()
     if scalar:
-        return output[-1].split("\n")[0]
+        return output = output[-1].split("\n")[0]
     return dtype(output)
 
 def prepare_dataset(df: pd.DataFrame, id_cols: List[str], y_col: List[str], attr_cols: List[str], diff_cols: List[str]) -> pd.DataFrame:
