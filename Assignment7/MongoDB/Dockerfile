@@ -12,4 +12,3 @@ RUN apt update &&\
     pip3 install -r requirements.txt &&\
     mkdir -p /data/db
 
-CMD ["python3", "mongodating.py"]
