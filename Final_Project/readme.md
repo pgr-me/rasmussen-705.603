@@ -1,26 +1,16 @@
-# Welcome to a Readme File
-## Second Welcome
-### Third Welcome
+# Change detection algorithm
 
-*italic*
+To build the container and have Jupyter notebook:
+```
+docker run \
+    --gpus all \
+    --restart=unless-stopped \
+    -it \
+    -p 8888:8888 -p 8787:8787 -p 8786:8786 -p 5000:5000 \
+    [image_id]
+```
 
-**bold**
+## Jupyter
 
-* list 1
-* list 2
-
-- list 1
-- list 2
-
-This decribes this particular project and directory level.
-
-
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
-
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
-
-Bring in local graphic
-![GitHub Logo](./regan.png) 
-
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 
+To start a Jupyter Lab session, do:
+`$ jupyter lab --no-browser --ip=0.0.0.0 --allow-root`
