@@ -1,21 +1,32 @@
-# Assignment 4: Neo4J
+# Assignment 7: Neo4J and MongoDB
 
 ## Project description
 
-This program builds a Neo4J container.
+This program provides code to analyze a speed dating dataset using 1) Neo4J and 2) MongoDB as two separate approaches to organize the data for use in a decision tree classifier to predict which dates end in matches..
 
-## Data organization
+## Assignment structure
 
-Inputs are downloaded into the `raw` data directory. The program saves outputs in the `processed` directory. This program is idempotent: the inputs are never overwritten; only new outputs are created.
+The assignment is sub-divided into Neo4J and MongoDB folders. Each has its own set of scripts and Dockerfiles to reproduce the work in a container.
 ```
-.
-├── nosql/mongo
-│   ├── Assignment7.py
-│   ├── Assignment7.ipynb
-│   └── Assignment7.ipynb
-│   └── raw
-│       ├── Musical_Instruments_5.json
-│       └── Musical_instruments_reviews.csv
+Assignment7
+├── MongoDB
+│   ├── Dockerfile
+│   ├── mongodating.ipynb
+│   ├── mongodating.py
+│   ├── readme.md
+│   ├── requirements.txt
+│   └── utils.py
+├── Neo4J
+│   ├── Dockerfile
+│   ├── cypher
+│   │   ├── female_male_ratio.cypher
+│   │   ├── match_frac.cypher
+│   │   └── schema_viz.cypher
+│   ├── neo4dating.py
+│   ├── neo4jdating.ipynb
+│   ├── readme.md
+│   ├── requirements.txt
+│   └── utils.py
 └── readme.md
 ```
 
@@ -23,7 +34,9 @@ Inputs are downloaded into the `raw` data directory. The program saves outputs i
 
 Rather than clone the repository to run the code, the user can opt to pull Docker image for this assignment from [the DockerHub repo](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
 
-Pull the image: `$ docker pull pgrjhu/705.603:a7-mongodb`
+Pull the image: 
+* Neo4J: `$ docker pull pgrjhu/705.603:a7-neo4j`
+* MongoDB: `$ docker pull pgrjhu/705.603:a7-mongodb`
 
 Run the executable to reproduce the results: 
 ```
