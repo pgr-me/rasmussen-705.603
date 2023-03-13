@@ -2,3 +2,4 @@ jupyter
 jupyterlab
 pandas
 matplotlib
+pymongo
