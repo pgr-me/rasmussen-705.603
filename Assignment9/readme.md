@@ -18,7 +18,7 @@ Dockerfiles to reproduce the work in a container.
 * `main.py`: Provides a script version of `Local Blackjack.ipynb`.
 * `SageMaker Blackjack.ipynb`: Implements the `Local Blackjack.ipynb` in AWS SageMaker.
 
-File and module organization is as follows:
+File and module organization - after creating and populating data directories - is as follows:
 
 ```
 .
@@ -38,10 +38,6 @@ File and module organization is as follows:
 |   |   `-- local_py_lookup_total_rewards_over_time_no_exploration.png
 |   `-- raw
 |-- main.py
-|-- notebooks
-|   |-- Local\ Blackjack.ipynb
-|   |-- SageMaker\ Tutorial.ipynb
-|   `-- checkpoint.pth
 |-- qlearning
 |   |-- __init__.py
 |   |-- agent.py
@@ -62,6 +58,7 @@ from [the DockerHub repo](https://hub.docker.com/repository/docker/pgrjhu/705.60
 Pull the image: `$ docker pull pgrjhu/705.603:a9`
 
 Instantiate the container:
+
 ```
 docker run \
 -p 8888:8888 \
