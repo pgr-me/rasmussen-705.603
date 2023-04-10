@@ -1,26 +1,92 @@
-# Welcome to a Readme File
-## Second Welcome
-### Third Welcome
+# Assignment 9: Lookup-table- and deep-learning-based reinforcement learning
 
-*italic*
+## Project description
 
-**bold**
+This program provides code to train and analyze two implementations of a reinforcement learner that plays blackjack. The
+first implementation uses a lookup-table to map state-action pairs to rewards and the second uses a neural network to
+map state-action paris to rewards.
 
-* list 1
-* list 2
+## Assignment structure
 
-- list 1
-- list 2
+The assignment is sub-divided into the following parts:Neo4J and MongoDB folders. Each has its own set of scripts and
+Dockerfiles to reproduce the work in a container.
 
-This decribes this particular project and directory level.
+* `SageMaker Tutorial.ipynb`: Provides a walkthrough based on an AWS SageMaker tutorial for how to train, test, and
+  analyze an XGBoost classifier.
+* `Local Blackjack.ipynb`: Based on a notebook provided in Module 10, this notebook trains and analyzes two
+  reinforcement learner implementations: look-table and deep learning-based.
+* `main.py`: Provides a script version of `Local Blackjack.ipynb`.
+* `SageMaker Blackjack.ipynb`: Implements the `Local Blackjack.ipynb` in AWS SageMaker.
+
+File and module organization - after creating and populating data directories - is as follows:
+
+```
+.
+|-- Dockerfile
+|-- Local\ Blackjack.ipynb
+|-- SageMaker\ Tutorial.ipynb
+|-- data
+|   |-- interim
+|   |-- processed
+|   |   |-- local_notebook_lookup_total_rewards_over_time.png
+|   |   |-- local_notebook_model_checkpoint.pth
+|   |   |-- local_notebook_rewards_over_time.png
+|   |   |-- local_notebook_total_cash_over_time.png
+|   |   |-- local_py_dl_rewards_over_time.png
+|   |   |-- local_py_dl_total_cash_over_time.png
+|   |   |-- local_py_lookup_total_rewards_over_time.png
+|   |   `-- local_py_lookup_total_rewards_over_time_no_exploration.png
+|   `-- raw
+|-- main.py
+|-- qlearning
+|   |-- __init__.py
+|   |-- agent.py
+|   |-- experience.py
+|   |-- lookup_rl.py
+|   |-- qnet.py
+|   `-- train.py
+`-- requirements.txt
+```
+
+## Docker: Local runs
+
+Rather than clone the repository to run the code, the user can opt to pull Docker image for this assignment
+from [the DockerHub repo](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
+
+Pull the image: `$ docker pull pgrjhu/705.603:a9`
+
+Instantiate the container:
+
+```
+docker run \
+-p 8888:8888 \
+-dit \
+--name a9 \
+pgrjhu/705.603:a9
+```
+
+Enter the container:
+```
+docker exec -ti a9 bash
+```
+### Running notebooks
+In the container, to run the notebooks, you'll need to start Jupyter notebook:
+```
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
+
+Then open up `localhost:8888` in your browser, enter the key from the terminal, and open the desired notebook.
+
+### Running `.py` file
+
+In `/rl`, execute `python main.py` to reproduce the local results.
+
+## SageMaker
+
+To run the SageMaker notebook, refer to the `SageMaker Tutorial.ipynb` to get signed up to AWS SageMaker. Then,
+run `SageMaker Tutorial.ipynb` in SageMaker. Finally, you'll be ready to run this `SageMaker Blackjack.ipynb`.
+
+Additional instructions for running an image are provided in
+the [DockerHub repo README](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
 
 
-[GitHub Readme1 Reference](https://github.com/tchapi/markdown-cheatsheet/blob/master/README.md)
-
-[General Readme2 Reference](https://www.mygreatlearning.com/blog/readme-file/#:~:text=When%20you%20create%20a%20repository,be%20easily%20converted%20to%20text)
-
-Bring in local graphic
-![GitHub Logo](./regan.png) 
-
-Bring in remote graphic
-![GitHub Logo](https://upload.wikimedia.org/wikipedia/commons/d/de/Amazon_icon.png) 

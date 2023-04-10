@@ -1,0 +1,8 @@
+jupyter
+jupyterlab
+pandas
+matplotlib
+gym
+gym[toy_text]
+sagemaker
+boto3
