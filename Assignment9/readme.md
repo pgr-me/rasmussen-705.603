@@ -48,9 +48,7 @@ File and module organization - after creating and populating data directories - 
 `-- requirements.txt
 ```
 
-## Docker
-
-### Local runs
+## Docker: Local runs
 
 Rather than clone the repository to run the code, the user can opt to pull Docker image for this assignment
 from [the DockerHub repo](https://hub.docker.com/repository/docker/pgrjhu/705.603/general).
@@ -66,6 +64,24 @@ docker run \
 --name a9 \
 pgrjhu/705.603:a9
 ```
+
+Enter the container:
+```
+docker exec -ti a9 bash
+```
+### Running notebooks
+In the container, to run the notebooks, you'll need to start Jupyter notebook:
+```
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
+
+Then open up `localhost:8888` in your browser, enter the key from the terminal, and open the desired notebook.
+
+### Running `.py` file
+
+In `/rl`, execute `python main.py` to reproduce the local results.
+
+## SageMaker
 
 To run the SageMaker notebook, refer to the `SageMaker Tutorial.ipynb` to get signed up to AWS SageMaker. Then,
 run `SageMaker Tutorial.ipynb` in SageMaker. Finally, you'll be ready to run this `SageMaker Blackjack.ipynb`.
