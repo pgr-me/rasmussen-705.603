@@ -9,4 +9,4 @@ WORKDIR /work
 COPY Final_Project/. /work
 RUN pip install -r requirements.txt
 
-RUN mkdir -p /work/data/raw /work/data/processed
+RUN mkdir -p /work/data/raw /work/data/processed /work/data/interim
