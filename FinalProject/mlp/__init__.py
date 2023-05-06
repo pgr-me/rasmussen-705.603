@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 # Third party imports
+import numpy as np
+from numpy.typing import NDArray
+import torch
 from torch.utils.data import DataLoader
 
 # Local imports
@@ -9,7 +12,14 @@ from mlp.mlp import MLP
 from mlp.train import train_test_ae_mlp
 
 
-def encode(loader: DataLoader, model: MLP, scenes: int, rows: int, cols: int) -> NDArray:
+def encode(
+    loader: DataLoader,
+    model: MLP,
+    scenes: int,
+    rows: int,
+    cols: int,
+    device
+    ) -> NDArray:
     """
     Encode scenes in loader with model.
     Arguments:

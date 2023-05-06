@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 # Third party imports
 from bocd import BayesianOnlineChangePointDetection as BOCD, ConstantHazard, StudentT
 import bottleneck   
-import geopandas as gpd
 from joblib import Parallel, delayed
 import numpy as np
 from numpy.typing import NDArray

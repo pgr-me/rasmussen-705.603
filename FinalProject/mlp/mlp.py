@@ -1,22 +1,9 @@
-# Standard library imports
-from numbers import Number
-from pathlib import Path
-from typing import Dict, List, Tuple
+#!/usr/bin/env python3
 
 # Third party imports
-import numpy as np
-import pandas as pd
-import rasterio as rio
 import torch
 import torch.nn as nn
-from torch.nn.modules.loss import MSELoss
-from torch.optim.adam import Adam
-from torch.optim.lr_scheduler import StepLR
-from torch.utils.data import Dataset, DataLoader
 
-
-
-    
 
 class MLP(nn.Module):
     """Multilayer perceptron model."""
@@ -35,5 +22,3 @@ class MLP(nn.Module):
         output_z = self.decoder_output_layer(hidden_y)
         output_y = torch.relu(output_z)
         return output_y
-
-
