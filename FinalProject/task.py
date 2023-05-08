@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime as dt
 import json
 import os
+import multiprocessing
 from pathlib import Path
 import warnings
 
@@ -28,6 +29,10 @@ from clustering import label_scenes, make_cluster_training_set
 from bocpd import bocd, GaussianUnknownMean, plot_posterior
 from detect import parallel_bocd
 
+# Data dir for users of Docker
+DATA_DIR = Path("/work/data")
+# Parallelization params
+CORES = multiprocessing.cpu_count() - 1
 # Download constants
 RES = 10
 STAC_ENDPOINT = "https://planetarycomputer.microsoft.com/api/stac/v1"
@@ -53,9 +58,10 @@ START_INDEX = 10
 N_STDS = 1.75
 
 
+
 def parser():
     parser = argparse.ArgumentParser(description="Run the pipeline.")
-    parser.add_argument("--data_dir", type=Path, default=Path("data"), help="Path to data directory.")
+    parser.add_argument("--data_dir", type=Path, default=DATA_DIR, help="Path to data directory.")
     parser.add_argument("--cores", type=int, default=1, help="Number of cores to use.")
     # Download args
     parser.add_argument("--skip_download", action="store_true", help="True to skip downloading COGs.")
