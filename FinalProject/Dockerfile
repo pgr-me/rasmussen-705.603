@@ -9,6 +9,8 @@ WORKDIR /work
 COPY FinalProject/. /work
 COPY data/FinalProject/raw /work/data/raw
 
-RUN pip install requirements.txt
+RUN apt-get update &&\
+    /usr/local/bin/python -m pip install --upgrade pip &&\
+    pip3 install -r requirements.txt
 
 RUN mkdir -p /work/data/raw /work/data/processed /work/data/interim
