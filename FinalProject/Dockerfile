@@ -14,3 +14,5 @@ RUN apt-get update &&\
     pip3 install -r requirements.txt
 
 RUN mkdir -p /work/data/raw /work/data/processed /work/data/interim
+
+WORKDIR /work/FinalProject
