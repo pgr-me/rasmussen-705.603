@@ -1,5 +1,6 @@
 # Standard library imports
 import argparse
+from datetime import datetime as dt
 import json
 import os
 from pathlib import Path
@@ -7,21 +8,25 @@ import warnings
 
 # Third party imports
 import geopandas as gpd
+from joblib import Parallel, delayed
 import numpy as np
 import pandas as pd
 from pyclustering.cluster.kmeans import kmeans
 from pyclustering.cluster.center_initializer import kmeans_plusplus_initializer
 from pyclustering.utils.metric import type_metric, distance_metric
+import rasterio as rio
 from scipy.spatial.distance import mahalanobis
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
+from tqdm import tqdm
 
 # Local imports
 from download import download_cogs
 from mlp import MLP, MLPDataset, train_test_ae_mlp, encode
 from clustering import label_scenes, make_cluster_training_set
 from bocpd import bocd, GaussianUnknownMean, plot_posterior
+from detect import parallel_bocd
 
 # Download constants
 RES = 10
@@ -43,6 +48,9 @@ K = 4
 region_sample_size = 5000
 # Change detection constants
 BOCD_PARAMS = dict(hazard=1/100, mean0=1, var0=2, varx=1,)
+WINDOW = 10
+START_INDEX = 10
+N_STDS = 1.75
 
 
 def parser():
@@ -64,7 +72,10 @@ def parser():
     parser.add_argument("--skip_mlp_inference", action="store_true", help="True to skip MLP inference.")
     # KMeans args
     parser.add_argument("--skip_clustering", action="store_true", help="True to skip KMeans task.")
+    # Change detection args
+    parser.add_argument("--skip_change_detection", action="store_true", help="True to skip change detection task.")
     return parser.parse_args()
+
 
 if __name__ == "__main__":
     args = parser()
@@ -200,7 +211,45 @@ if __name__ == "__main__":
         final_centers = kmeans_instance.get_centers()
         label_scenes(regions, cluster_dir, encoded_dir, cores, kmeans_instance, cogs_dir)
     
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Detect change
-    
-    # Summarize change
+    if not args.skip_detection:
+        regions = gpd.read_file(args.raw_dir / "regions.geojson").set_index("event_key")
+        for region, region_meta in regions.iterrows():
+            raster_src = cluster_dir / f"{region}.tif"
+            with rio.open(raster_src) as src:
+                profile = src.profile
+                labeled_scenes = src.read()
+            timesteps, rows, cols = labeled_scenes.shape
+            raveled_scenes = labeled_scenes.reshape(timesteps, -1)
+            changepoints = Parallel(n_jobs=cores)(
+                delayed(parallel_bocd)
+                (raveled_scenes, unipix, BOCD_PARAMS, WINDOW) for unipix in tqdm(range(rows * cols))
+            )
+            changepoint_arr = np.stack(changepoints, axis=0)
+
+            meta = pd.read_csv(meta_dir / f"{region}.csv")
+            meta["solar_date"] = pd.to_datetime(meta["solar_date"])
+            meta["ordinal"] =meta["solar_date"].apply(lambda x: dt.toordinal(x))
+            year = meta["solar_date"].dt.year
+            month = meta["solar_date"].dt.month
+            day = meta["solar_date"].dt.day
+            fractional_year = (year + month / 12 + day / 30.5).values
+
+            sds = meta["ordinal"].values[changepoint_arr[:, 0]].reshape(rows, cols)
+            eds = meta["ordinal"].values[changepoint_arr[:, 1]].reshape(rows, cols)
+
+            sds_fracyear = fractional_year[changepoint_arr[:, 0]].reshape(rows, cols)
+            eds_fracyear = fractional_year[changepoint_arr[:, 1]].reshape(rows, cols)
+
+            ref_cog_src = next(cogs_dir.glob(f"{region}*.tif"))
+            with rio.open(ref_cog_src) as src:
+                profile = src.profile
+                
+            profile.update(dict(dtype=np.float32, count=2))
+            with rio.open(processed_dir / f"{region}.tif", "w", **profile) as dst:
+                dst.write(sds_fracyear.astype(np.float32), 1)
+                dst.write(eds_fracyear.astype(np.float32), 2)
+
+
 

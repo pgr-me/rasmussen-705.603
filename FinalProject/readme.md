@@ -49,6 +49,12 @@ For comparison, below is an example of a plot of a non-change detection pixel, a
 
 ![Change detection plot-non change pixel](figs/Non-change%20pixel%20BOCPD.png)
 
+## Results
+
+An example of final results, which are created by the `detect` task, are shown below:
+
+![Change map](figs/Change%20map.png)
+
 ## Project structure
 
 The project structure is provided below for reference:

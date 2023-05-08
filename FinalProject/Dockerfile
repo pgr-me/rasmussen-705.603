@@ -8,6 +8,6 @@ WORKDIR /work
 
 COPY FinalProject/. /work
 COPY data/FinalProject/raw /work/data/raw
-#RUN pip install -r requirements.txt
+RUN conda install -y -f environment.yml
 
 RUN mkdir -p /work/data/raw /work/data/processed /work/data/interim
