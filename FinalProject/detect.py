@@ -4,7 +4,6 @@
 from typing import Any, Dict, List
 
 # Third party imports
-from bocpd import BayesianOnlineChangePointDetection as BOCD, ConstantHazard, StudentT
 import bottleneck   
 from joblib import Parallel, delayed
 import numpy as np
@@ -97,27 +96,3 @@ def retrieve_change_dates(dates: NDArray, index_changes: NDArray) -> Dict[str, A
     """
     return pd.to_datetime(dates[index_changes])
 
-
-def summarize_pixel(
-    reshaped_encoded: NDArray,
-    unipix: int,
-    reshaped_mask: NDArray,
-    bocd_params: Dict[str, Dict],
-    cogs_meta: pd.DataFrame,
-    region: str
-    ) -> Dict[str, Any]:
-    """
-    Return changepoint summary statistics for one pixel.
-    Arguments:
-        reshaped_encoded: Two-dimensional array of encoded pixels.
-        unipix: Index of pixel.
-        bocd_params: Dictionary of BOCD parameters.
-        region: Region.
-    Returns: Summary stats for one pixel.
-    """
-    dates = cogs_meta["solar_date"].values[reshaped_mask[unipix, :]]
-    vals = reshaped_encoded[unipix, :][reshaped_mask[unipix, :]]
-    run_lengths = compute_run_lengths(vals, bocd_params, region)
-    index_changes = detect_change(run_lengths)
-    change_dates = retrieve_change_dates(dates, index_changes)
-    return pd.Series(change_dates).describe(datetime_is_numeric=True).to_dict()
