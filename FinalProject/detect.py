@@ -1,42 +1,39 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 # Third party imports
-from bocd import BayesianOnlineChangePointDetection as BOCD, ConstantHazard, StudentT
+from bocpd import BayesianOnlineChangePointDetection as BOCD, ConstantHazard, StudentT
 import bottleneck   
 from joblib import Parallel, delayed
 import numpy as np
 from numpy.typing import NDArray
 import pandas as pd
 
+# Local imports
+from bocpd import bocd, GaussianUnknownMean, plot_posterior
 
-def compute_run_lengths(arr: NDArray, bocd_params: Dict[str, Dict], region: str) -> NDArray:
-    """
-    Compute run lengths for arr.
-    Arguments:
-        arr: Array of values.
-        bocd_params: Dictionary of BOCD parameters.
-        region: Region.
-    Returns: Run lengths.
-    """
-    student_params = {k:v for k, v in bocd_params[region].items() if k != "hazard"}
-    bc = BOCD(ConstantHazard(bocd_params[region]["hazard"]), StudentT(**student_params))
-    rt_mle = np.empty(arr.shape)
-    for i, d in enumerate(arr):
-        bc.update(d)
-        rt_mle[i] = bc.rt
-    return rt_mle
 
-def detect_change(rt_mle: NDArray) -> NDArray:
-    """ 
-    Detect change points in rt_mle.
-    Arguments:
-        rt_mle: Run lengths.
-        Returns: Indices of change points.
+def parallel_bocd(raveled_scenes, unipix: int, bocd_params: dict, window: int) -> List[int]:
     """
-    return np.where(np.diff(rt_mle) < 0)[0]
+        Run BOCD on a single pixel.
+        Arguments:
+            raveled_scenes: Raveled scenes.
+            unipix: Unipixel index.
+            bocd_params: Dictionary of BOCD parameters.
+            window: Window size.
+        Returns: First and last changepoints if they exist.
+    """
+    model = GaussianUnknownMean(bocd_params["mean0"], bocd_params["var0"], bocd_params["varx"])
+    R, pmean, pvar = bocd(raveled_scenes[:, unipix], model, bocd_params["hazard"])
+    predicted_cps = np.where(
+        (np.diff((np.argmax(R, axis=1)))<0)
+        & (np.max(R, axis=1)[1:] > 1e-1)
+        )[0]
+    if len(predicted_cps) == 0:
+        return [-1, -1]
+    return [predicted_cps[0], predicted_cps[-1]]
 
 
 def make_change_map(
