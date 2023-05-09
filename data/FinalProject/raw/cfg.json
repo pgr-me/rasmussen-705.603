@@ -1,0 +1,30 @@
+{
+    "sentinel-2-l2a": {
+        "assets": {
+            "*": {
+                "data_type": "uint16",
+                "nodata": 0
+            },
+            "SCL": {
+                "data_type": "uint8",
+                "nodata": 0
+            },
+            "visual": {
+                "data_type": "uint8",
+                "nodata": 0
+            }
+        },
+        "aliases": {
+            "blue": "B02",
+            "green": "B03",
+            "red": "B04",
+            "nir08": "B8A",
+            "swir16": "B11",
+            "swir22": "B12",
+            "qa": "SCL"
+        }
+    },
+    "*": {
+        "warnings": "ignore"
+    }
+}
