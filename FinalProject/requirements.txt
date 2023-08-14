@@ -162,7 +162,7 @@ torch==1.13.1
 torchelastic==0.2.2
 torchtext==0.14.1
 torchvision==0.14.1
-tornado==6.3.1
+tornado==6.3.3
 tqdm
 traitlets
 types-dataclasses==0.6.6
